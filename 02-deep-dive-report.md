@@ -8,9 +8,6 @@
 4. Thành viên 4: Bùi Đặng Quốc An - 2A202601799
 5. Thành viên 5: Nguyễn Minh Hoàng - 2A202601609
 6. Thành viên 6: Nguyễn Hoàng Việt - 2A202601940
-
-*(Lưu ý: Hãy thay thế phần trong ngoặc vuông bằng thông tin thật của các bạn trong nhóm nhé!)*
-
 ---
 
 ## 1. Bài toán lựa chọn
