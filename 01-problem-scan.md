@@ -1,14 +1,11 @@
-# 📄 Báo Cáo Cá Nhân: Scan & Quick Problem Cards
+# 📄 Báo Cáo Cá Nhân: Scan & Quick Problem Cards (Lab 02)
 
-- **Họ và tên:** [Tên của bạn]
-- **Mã số sinh viên (MSSV):** [MSSV của bạn]
-- **Đơn vị:** Vin Smart Future (Vingroup)
-
----
+- **Họ và tên:** Nguyễn Hoàng Việt
+- **Mã số sinh viên (MSSV):** 2A202601940
 
 ## 🔍 Phase 1 — SCAN: Bảng Quét Cơ Hội Vận Hành (5 Problems)
 
-Áp dụng 4 Lenses (Lặp lại, Tốn thời gian, AI-upgrade, Stakeholder Pain) để quét qua các công ty thành viên Vingroup:
+Áp dụng 4 Lenses (Lặp lại, Tốn thời gian, AI-upgrade, Stakeholder Pain) để quét qua hoạt động vận hành của các công ty thành viên Vingroup:
 
 | # | Subsidiary (VinFast/Xanh SM...) | Lens | Mô tả ngắn bài toán |
 |---|----------------------------------|------|---------------------|
