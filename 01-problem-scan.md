@@ -1,45 +1,109 @@
-# Phase 1: SCAN - Tìm kiếm cơ hội tối ưu bằng AI
-
-Dưới đây là danh sách các bài toán (vấn đề) trong hệ sinh thái Vingroup mà nhóm tìm thấy:
-
-| # | Công ty | Loại vấn đề (Lens) | Mô tả bài toán |
-|---|------------|------|---------------------|
-| 1 | **Xanh SM** | Lặp lại | So khớp và phân bổ lại cuốc xe khi khách hàng yêu cầu thay đổi điểm đến giữa chừng. |
-| 2 | **Xanh SM** | Tốn thời gian | Điều phối viên xử lý thủ công các phản hồi khẩn cấp từ tài xế về sự cố sạc pin hoặc va chạm thực địa (mất 15-20 phút/lượt). |
-| 3 | **VinFast** | Lặp lại | So khớp hóa đơn sạc điện và đối chiếu số liệu trạm sạc đối tác hằng tuần. |
-| 4 | **Vinhomes** | AI-upgrade | Hệ thống phân loại và điều hướng tự động các phản hồi/khiếu nại của cư dân trên App Vinhomes Resident. |
-| 5 | **Vinmec** | Pain từ người khác | Bác sĩ mất quá nhiều thời gian viết tóm tắt hồ sơ xuất viện cho bệnh nhân (20-30 phút/ca). |
+# 01 — Problem Scan (Cá nhân) — Vin Smart Future
 
 ---
 
-# Phase 2: QUICK-ASSESS - 3 Thẻ Bài Toán Tiềm Năng
+# 🔍 Phase 1 — SCAN
 
-### Thẻ Bài Toán 1 (Bài toán được nhóm chọn)
-- **Bài toán:** Tài xế Xanh SM báo cáo sự cố sạc pin / hết pin giữa đường cần điều phối cứu hộ hoặc trạm sạc gần nhất.
-- **Công ty thành viên:** Xanh SM (GSM)
-- **Ai đang gặp khó khăn?** Tài xế (phải chờ đợi), Điều phối viên (quá tải công việc vào giờ cao điểm).
-- **Quy trình thủ công hiện tại:**
-  1. Tài xế gọi báo hết pin -> 2. Tra cứu định vị GPS -> 3. Tìm trạm sạc trống -> 4. Soạn tin nhắn hướng dẫn -> 5. Gọi cứu hộ (nếu pin < 5%).
-- **Bước gây tắc nghẽn (Bottleneck):** Bước 3 & 4: Tra cứu trạm sạc phù hợp và tự tay soạn tin nhắn (tốn 10-12 phút).
-- **Đo lường thành công:** Giảm thời gian xử lý sự cố từ 15 phút xuống dưới 3 phút/lượt.
-- **Giải pháp AI:** LLM Feature (Tự động tra cứu và soạn tin nhắn chỉ dẫn/cứu hộ).
+Dùng **4 Lenses** quét qua hoạt động vận hành của các công ty thành viên Vingroup. Danh sách tối thiểu 5 bài toán thực tế:
 
-### Thẻ Bài Toán 2
-- **Bài toán:** Phân loại và điều hướng khiếu nại của cư dân trên App Vinhomes Resident đang quá chậm trễ.
-- **Công ty thành viên:** Vinhomes
-- **Ai đang gặp khó khăn?** Nhân viên CSKH (phải đọc và chuyển tiếp thủ công), Cư dân (thời gian chờ phản hồi lâu).
-- **Quy trình thủ công hiện tại:**
-  1. Cư dân gửi khiếu nại -> 2. CSKH đọc -> 3. Phân loại theo ban ngành (điện, nước, vệ sinh) -> 4. Chuyển tiếp cho kỹ thuật.
-- **Bước gây tắc nghẽn (Bottleneck):** Đọc và phân loại thủ công.
-- **Đo lường thành công:** Giảm thời gian chuyển tiếp khiếu nại từ 12 tiếng xuống 15 phút.
-- **Giải pháp AI:** LLM Classification & Rule-based Router (Tự động gắn tag chuyên mục).
+| # | Subsidiary (VinFast/Xanh SM...) | Lens | Mô tả ngắn bài toán |
+|---|----------------------------------|------|---------------------|
+| 1 | VinFast | Lặp lại | Kỹ thuật viên nhập tay dữ liệu chẩn đoán lỗi xe (mã DTC) vào hệ thống bảo hành để đối chiếu điều khoản |
+| 2 | VinFast | Tốn thời gian | CS đọc và phân loại thủ công ticket khiếu nại pin/phần mềm từ app, hotline, mạng xã hội để route đúng phòng ban |
+| 3 | VinFast | AI-upgrade | Trợ lý ảo trong xe phản hồi rập khuôn theo kịch bản cố định, không hiểu câu hỏi tự nhiên về pin/tính năng ADAS |
+| 4 | VinFast | Stakeholder Pain (nhân viên) | Nhân viên đại lý tự tổng hợp báo cáo tồn kho phụ tùng theo tuần bằng Excel, đối chiếu thủ công giữa các kho vùng |
+| 5 | VinFast | Stakeholder Pain (khách hàng) | Khách hàng phàn nàn dự đoán quãng đường/thời gian sạc còn lại không chính xác so với thực tế vận hành |
 
-### Thẻ Bài Toán 3
-- **Bài toán:** Bác sĩ tốn rất nhiều thời gian để viết Tóm tắt hồ sơ xuất viện (Discharge Summary).
-- **Công ty thành viên:** Vinmec
-- **Ai đang gặp khó khăn?** Bác sĩ chuyên khoa (bị quá tải công việc giấy tờ, hành chính).
-- **Quy trình thủ công hiện tại:**
-  1. Tổng hợp bệnh án điện tử -> 2. Xem kết quả xét nghiệm/chuẩn đoán -> 3. Viết tay tóm tắt xuất viện bằng ngôn ngữ dễ hiểu.
-- **Bước gây tắc nghẽn (Bottleneck):** Tổng hợp dữ liệu phân tán và soạn thảo văn bản (tốn 20-30 phút/ca).
-- **Đo lường thành công:** Giảm thời gian soạn hồ sơ xuống dưới 5 phút, độ chính xác y khoa đạt 100%.
-- **Giải pháp AI:** LLM Feature (Agent hỗ trợ trích xuất thông tin y tế thành văn bản tóm tắt).
+---
+
+# 🃏 Phase 2 — QUICK-ASSESS: 3 Quick Problem Cards
+
+Top 3 bài toán được chọn từ danh sách SCAN ở trên để đánh giá nhanh: **#1 (Nhập tay mã DTC), #2 (Phân loại ticket khiếu nại), #3 (Trợ lý ảo trong xe)**.
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #1                                       │
+│                                                             │
+│ Bài toán (1 câu): Kỹ thuật viên nhập tay mã lỗi DTC vào hệ  │
+│ thống bảo hành để đối chiếu điều khoản.                     │
+│ Công ty thành viên: [x] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
+│                                                             │
+│ Ai đang đau (Actor)? Kỹ thuật viên đại lý (Service Advisor) │
+│                                                             │
+│ Workflow thủ công hiện tại (4 bước):                        │
+│   1. Đọc mã DTC từ máy chẩn đoán ──> 2. Tra bảng điều khoản │
+│   bảo hành ──> 3. Gõ tay mã lỗi + điều khoản vào hệ thống   │
+│   ──> 4. Đối chiếu, xác nhận với quản lý trước khi duyệt    │
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 3 (⏱ 8 phút/lượt,     │
+│ hay gõ nhầm mã DTC dẫn đến từ chối bảo hành sai)             │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2-3 (tự động tra │
+│ cứu điều khoản khớp mã DTC và điền sẵn form)                │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)? Giảm thời gian nhập   │
+│ liệu từ 8 phút ──> dưới 1 phút/lượt; tỉ lệ gõ sai mã giảm   │
+│ từ ~5% xuống dưới 0.5%.                                     │
+│                                                             │
+│ Quick Architecture: [x] Rule  [ ] No AI  [ ] LLM  [ ] Agent │
+└─────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #2                                       │
+│                                                             │
+│ Bài toán (1 câu): CS đọc và phân loại thủ công ticket khiếu │
+│ nại pin/phần mềm từ app, hotline, mạng xã hội để route đúng │
+│ phòng ban.                                                  │
+│ Công ty thành viên: [x] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
+│                                                             │
+│ Ai đang đau (Actor)? Nhân viên CSKH (Customer Support)      │
+│                                                             │
+│ Workflow thủ công hiện tại (4 bước):                        │
+│   1. Nhận ticket từ 3 kênh (app/hotline/MXH) ──> 2. Đọc nội │
+│   dung, xác định chủ đề (pin/phần mềm/khác) ──> 3. Tra bảng │
+│   phân công theo phòng ban ──> 4. Gắn nhãn, chuyển ticket   │
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2 (⏱ 6 phút/lượt,     │
+│ dễ hiểu sai ý khách, route nhầm phòng ban)                   │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2-3 (phân loại   │
+│ chủ đề + gợi ý phòng ban nhận ticket)                        │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)? 85% ticket được phân  │
+│ loại đúng phòng ban dưới 10 giây; giảm thời gian xử lý từ   │
+│ 6 phút ──> dưới 1 phút/lượt.                                │
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent │
+└─────────────────────────────────────────────────────────────┘
+```
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ QUICK PROBLEM CARD #3                                       │
+│                                                             │
+│ Bài toán (1 câu): Trợ lý ảo trong xe phản hồi rập khuôn theo│
+│ kịch bản cố định, không hiểu câu hỏi tự nhiên về pin/ADAS.  │
+│ Công ty thành viên: [x] VinFast  [ ] Xanh SM  [ ] Vinhomes  │
+│                     [ ] Vinmec   [ ] Khác (Ghi rõ)________  │
+│                                                             │
+│ Ai đang đau (Actor)? Khách hàng lái xe VinFast              │
+│                                                             │
+│ Workflow thủ công hiện tại (3 bước):                        │
+│   1. Khách hỏi câu tự do ──> 2. Hệ thống match từ khoá cố   │
+│   định trong kịch bản ──> 3. Trả lời sai/không nhận diện,   │
+│   khách phải gọi hotline                                    │
+│                                                             │
+│ Bước nào tốn thời gian/lỗi nhất? Bước 2 (⏱ không xác định   │
+│ được ý định câu hỏi, tỉ lệ "không hiểu" cao)                │
+│ AI có thể nhảy vào hỗ trợ ở bước nào? Bước 2 (hiểu ngôn ngữ │
+│ tự nhiên, trả lời dựa trên tài liệu kỹ thuật xe)             │
+│                                                             │
+│ Đo thành công bằng gì (Metric có số)? Giảm tỉ lệ "không     │
+│ hiểu câu hỏi" từ ~30% xuống dưới 5%; giảm số cuộc gọi        │
+│ hotline liên quan đến câu hỏi cơ bản 20%.                    │
+│                                                             │
+│ Quick Architecture: [ ] No AI  [ ] Rule  [x] LLM  [ ] Agent │
+└─────────────────────────────────────────────────────────────┘
+```
